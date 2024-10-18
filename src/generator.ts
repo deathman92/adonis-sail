@@ -89,10 +89,12 @@ export default class Generator {
 
   async checkDatabases(services: Service[]) {
     const { compose } = await this.#readComposeFile()
-    const databases = new Set([
+    const allServices = new Set([
       ...services,
       ...(Object.keys(compose.services || {}) as Service[]),
-    ]).intersection(DATABASES)
+    ])
+
+    const databases = new Set([...allServices].filter((service) => DATABASES.has(service)))
 
     return [...databases]
   }
