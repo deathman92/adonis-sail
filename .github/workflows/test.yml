@@ -19,9 +19,9 @@ jobs:
         with:
           version: 9.12.2
       - name: Install
-        run: npm install
+        run: pnpm install
       - name: Run lint
-        run: npm run lint
+        run: pnpm lint
 
   typecheck:
     runs-on: ubuntu-latest
@@ -36,9 +36,9 @@ jobs:
         with:
           version: 9.12.2
       - name: Install
-        run: npm install
+        run: pnpm install
       - name: Run typecheck
-        run: npm run typecheck
+        run: pnpm typecheck
 
   tests:
     runs-on: ${{ matrix.os }}
@@ -60,6 +60,6 @@ jobs:
         with:
           version: 9.12.2
       - name: Install
-        run: npm run install
+        run: pnpm install
       - name: Run tests
-        run: npm run test
+        run: pnpm test
