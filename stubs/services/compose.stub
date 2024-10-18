@@ -1,0 +1,8 @@
+# For more information: https://github.com/deathman92/adonis-sail
+services:
+
+networks:
+  sail:
+    driver: bridge
+
+volumes:

@@ -1,0 +1,149 @@
+{
+  "name": "@deathman92/adonis-sail",
+  "description": "Generate a ready-to-use docker environment for your Adonis application",
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.12.2",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "type": "module",
+  "files": [
+    "build/src",
+    "build/commands",
+    "build/stubs",
+    "build/index.d.ts",
+    "build/index.js",
+    "build/configure.d.ts",
+    "build/configure.js"
+  ],
+  "main": "build/index.js",
+  "exports": {
+    ".": "./build/index.js",
+    "./commands": "./build/commands/main.js",
+    "./commands/*": "./build/commands/*.js"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "clean": "del-cli build",
+    "copy:templates": "copyfiles \"stubs/**/*.{stub,sh,sql}\" build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "quick:test": "node --import=./tsnode.esm.js --enable-source-maps bin/test.ts",
+    "pretest": "npm run lint",
+    "test": "c8 npm run quick:test",
+    "prebuild": "npm run lint && npm run clean",
+    "build": "tsc",
+    "postbuild": "npm run copy:templates && npm run index:commands",
+    "release": "np",
+    "version": "npm run build",
+    "prepublishOnly": "npm run build",
+    "index:commands": "adonis-kit index build/commands"
+  },
+  "keywords": [
+    "adonisjs",
+    "adonis6",
+    "docker",
+    "adonis-sail",
+    "docker-compose"
+  ],
+  "author": "deathman92 <deathman2292@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/deathman92/adonis-sail#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deathman92/adonis-sail.git"
+  },
+  "bugs": {
+    "url": "https://github.com/deathman92/adonis-sail/issues"
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^7.8.2",
+    "@adonisjs/core": "^6.14.1",
+    "@adonisjs/eslint-config": "^2.0.0-beta.7",
+    "@adonisjs/prettier-config": "^1.4.0",
+    "@adonisjs/tsconfig": "^1.4.0",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@japa/assert": "^3.0.0",
+    "@japa/file-system": "^2.3.0",
+    "@japa/runner": "^3.1.4",
+    "@japa/snapshot": "^2.0.6",
+    "@release-it/conventional-changelog": "^9.0.0",
+    "@swc/core": "1.7.26",
+    "@types/node": "^22.7.5",
+    "@types/sinon": "^17.0.3",
+    "c8": "^10.1.2",
+    "copyfiles": "^2.4.1",
+    "del-cli": "^5.1.0",
+    "eslint": "^9.12.0",
+    "esmock": "^2.6.8",
+    "husky": "^9.1.6",
+    "prettier": "^3.3.3",
+    "release-it": "^17.10.0",
+    "sinon": "^19.0.2",
+    "ts-node-maintained": "^10.9.4",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "@adonisjs/core": "^6.2.0"
+  },
+  "dependencies": {
+    "docker-compose": "^1.1.0",
+    "yaml": "^2.6.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "c8": {
+    "reporter": [
+      "text",
+      "html"
+    ],
+    "exclude": [
+      "tests/**"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release-it": {
+    "git": {
+      "requireCleanWorkingDir": true,
+      "requireUpstream": true,
+      "commitMessage": "chore(release): ${version}",
+      "tagAnnotation": "v${version}",
+      "push": true,
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": true,
+      "skipChecks": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
+    }
+  },
+  "overrides": {
+    "strtok3": "8.0.1"
+  },
+  "resolutions": {
+    "strtok3": "8.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "strtok3": "8.0.1"
+    }
+  },
+  "prettier": "@adonisjs/prettier-config"
+}
