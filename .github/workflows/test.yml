@@ -15,9 +15,7 @@ jobs:
         with:
           node-version: 22.x
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9.12.2
+        uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
       - name: Run lint
@@ -32,9 +30,7 @@ jobs:
         with:
           node-version: 22.x
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9.12.2
+        uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
       - name: Run typecheck
@@ -56,9 +52,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9.12.2
+        uses: pnpm/action-setup@v4
       - name: Install
         run: pnpm install
       - name: Run tests

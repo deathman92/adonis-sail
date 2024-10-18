@@ -17,9 +17,7 @@ jobs:
         with:
           node-version: 20
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 9.12.2
+        uses: pnpm/action-setup@v4
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
