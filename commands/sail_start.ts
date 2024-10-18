@@ -11,10 +11,13 @@ export default class SailAdd extends BaseCommand {
     stayAlive: false,
   }
 
-  @args.spread({ required: false })
+  @args.spread({ required: false, description: 'Services to start (empty for all)' })
   declare services: string[]
 
-  @flags.string({ default: '.env' })
+  @flags.string({
+    default: '.env',
+    description: 'Path to .env file for `docker compose up` command to use',
+  })
   declare envFile: string
 
   async run() {

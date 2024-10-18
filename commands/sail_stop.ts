@@ -11,7 +11,7 @@ export default class SailAdd extends BaseCommand {
     stayAlive: false,
   }
 
-  @args.spread({ required: false })
+  @args.spread({ required: false, description: 'Services to stop (empty for all)' })
   declare services: string[]
 
   async run() {

@@ -12,7 +12,7 @@ export default class SailAdd extends BaseCommand {
     stayAlive: false,
   }
 
-  @args.spread({ required: false })
+  @args.spread({ required: false, description: 'Services to add' })
   declare services: string[]
 
   async run() {
