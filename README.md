@@ -1,115 +1,155 @@
-# AdonisJS package starter kit
+<div align="center">
+<br/>
 
-> A boilerplate for creating AdonisJS packages
+## @deathman92/adonis-sail
 
-This repo provides you with a starting point for creating AdonisJS packages. Of course, you can create a package from scratch with your folder structure and workflow. However, using this starter kit can speed up the process, as you have fewer decisions to make.
+### Generate a ready-to-use local docker environment for your Adonis application
 
-## Setup
+<br/>
+</div>
 
-- Clone the repo on your computer, or use `giget` to download this repo without the Git history.
-  ```sh
-  npx giget@latest gh:adonisjs/pkg-starter-kit
-  ```
-- Install dependencies.
-- Update the `package.json` file and define the `name`, `description`, `keywords`, and `author` properties.
-- The repo is configured with an MIT license. Feel free to change that if you are not publishing under the MIT license.
+<div align="center">
 
-## Folder structure
+[![@foadonis/magnify](https://img.shields.io/npm/v/%40deathman92%2Fadonis-sail?style=for-the-badge)](https://www.npmjs.com/package/@deathman92/adonis-sail) [![License](https://img.shields.io/github/license/deathman92/adonis-sail?label=License&style=for-the-badge)](LICENCE) ![](https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript)
 
-The starter kit mimics the folder structure of the official packages. Feel free to rename files and folders as per your requirements.
+</div>
 
-```
-├── providers
-├── src
-├── bin
-├── stubs
-├── configure.ts
-├── index.ts
-├── LICENSE.md
-├── package.json
-├── README.md
-├── tsconfig.json
-├── tsnode.esm.js
+## Installation
+
+You can easily install and configure via the Ace CLI's `add` command.
+
+```shell
+node ace add @deathman92/adonis-sail
 ```
 
-- The `configure.ts` file exports the `configure` hook to configure the package using the `node ace configure` command.
-- The `index.ts` file is the main entry point of the package.
-- The `tsnode.esm.js` file runs TypeScript code using TS-Node + SWC. Please read the code comment in this file to learn more.
-- The `bin` directory contains the entry point file to run Japa tests.
-- Learn more about [the `providers` directory](./providers/README.md).
-- Learn more about [the `src` directory](./src/README.md).
-- Learn more about [the `stubs` directory](./stubs/README.md).
+##### Manual Install & Configure
 
-### File system naming convention
+You can also manually install and configure if you'd prefer
 
-We use `snake_case` naming conventions for the file system. The rule is enforced using ESLint. However, turn off the rule and use your preferred naming conventions.
-
-## Peer dependencies
-
-The starter kit has a peer dependency on `@adonisjs/core@6`. Since you are creating a package for AdonisJS, you must make it against a specific version of the framework core.
-
-If your package needs Lucid to be functional, you may install `@adonisjs/lucid` as a development dependency and add it to the list of `peerDependencies`.
-
-As a rule of thumb, packages installed in the user application should be part of the `peerDependencies` of your package and not the main dependency.
-
-For example, if you install `@adonisjs/core` as a main dependency, then essentially, you are importing a separate copy of `@adonisjs/core` and not sharing the one from the user application. Here is a great article explaining [peer dependencies](https://blog.bitsrc.io/understanding-peer-dependencies-in-javascript-dbdb4ab5a7be).
-
-## Published files
-
-Instead of publishing your repo's source code to npm, you must cherry-pick files and folders to publish only the required files.
-
-The cherry-picking uses the `files` property inside the `package.json` file. By default, we publish the following files and folders.
-
-```json
-{
-  "files": ["build/src", "build/providers", "build/stubs", "build/index.d.ts", "build/index.js"]
-}
+```shell
+pnpm install -D @deathman92/adonis-sail
 ```
 
-If you create additional folders or files, mention them inside the `files` array.
-
-## Exports
-
-[Node.js Subpath exports](https://nodejs.org/api/packages.html#subpath-exports) allows you to define the exports of your package regardless of the folder structure. This starter kit defines the following exports.
-
-```json
-{
-  "exports": {
-    ".": "./build/index.js",
-    "./types": "./build/src/types.js"
-  }
-}
+```shell
+node ace configure @deathman92/adonis-sail
 ```
 
-- The dot `.` export is the main export.
-- The `./types` exports all the types defined inside the `./build/src/types.js` file (the compiled output).
+## Available Services
 
-Feel free to change the exports as per your requirements.
+- PostgreSQL
+- MySQL
+- MariaDB
+- Redis
+- Minio
+- MailPit
+- Meilisearch
+- Typesense
 
-## Testing
+## Usage
 
-We configure the [Japa test runner](https://japa.dev/) with this starter kit. Japa is used in AdonisJS applications as well. Just run one of the following commands to execute tests.
+Make sure to install needed AdonisJs Package, and follow instructions before running Sail's commands.
+`@adonisjs/lucid`, `@adonisjs/redis`, `@adonisjs/mail`, `@adonisjs/drive`, [`@foadonis/magnify`](https://github.com/FriendsOfAdonis/magnify).
 
-- `npm run test`: This command will first lint the code using ESlint and then run tests and report the test coverage using [c8](https://github.com/bcoe/c8).
-- `npm run quick:test`: Runs only the tests without linting or coverage reporting.
+### Commands
 
-The starter kit also has a Github workflow file to run tests using Github Actions. The tests are executed against `Node.js 20.x` and `Node.js 21.x` versions on both Linux and Windows. Feel free to edit the workflow file in the `.github/workflows` directory.
+#### Sail Add
 
-## TypeScript workflow
+Add specified services to compose.yml file.
 
-- The starter kit uses [tsc](https://www.typescriptlang.org/docs/handbook/compiler-options.html) for compiling the TypeScript to JavaScript when publishing the package.
-- [TS-Node](https://typestrong.org/ts-node/) and [SWC](https://swc.rs/) are used to run tests without compiling the source code.
-- The `tsconfig.json` file is extended from [`@adonisjs/tsconfig`](https://github.com/adonisjs/tooling-config/tree/main/packages/typescript-config) and uses the `NodeNext` module system. Meaning the packages are written using ES modules.
-- You can perform type checking without compiling the source code using the `npm run type check` script.
+```shell
+node ace sail:add [...services]
+```
 
-Feel free to explore the `tsconfig.json` file for all the configured options.
+#### Sail Start
 
-## ESLint and Prettier setup
+Starts specified services (empty for all) using `docker compose up -d` command. Optionally you can pass path to .env file (by default, .env file is using).
 
-The starter kit configures ESLint and Prettier. Both configurations are stored within the `package.json` file and use our [shared config](https://github.com/adonisjs/tooling-config/tree/main/packages). Feel free to change the configuration, use custom plugins, or remove both tools altogether.
+```shell
+node ace sail:start [...services] [--env-file=.env]
+```
 
-## Using Stale bot
+#### Sail Stop
 
-The [Stale bot](https://github.com/apps/stale) is a Github application that automatically marks issues and PRs as stale and closes after a specific duration of inactivity.
+Stops specified services (empty for all) using `docker compose down` command.
 
-Feel free to delete the `.github/stale.yml` and `.github/lock.yml` files if you decide not to use the Stale bot.
+```shell
+node ace sail:stop [...services]
+```
+
+#### Sail Status
+
+Print status of running services using `docker compose ps` command.
+
+```shell
+node ace sail:status
+```
+
+## Environment Variables
+
+After installing or adding new service, needed environment variables will be added to `.env` file (overwritting existing).
+
+#### Example
+
+```shell
+node ace sail:add pgsql redis
+```
+
+`.env` file
+
+```shell
++ DB_HOST=localhost
++ DB_PORT=5432
++ DB_USER=sail
++ DB_PASSWORD=password
++ DB_DATABASE=app
++ REDIS_HOST=localhost
++ REDIS_PORT=6379
+```
+
+## Databases
+
+To connect to your application's databases from your local machine, you may use a graphical database management application such as [TablePlus](https://tableplus.com/).
+By default, exposed ports are :
+
+- MySQL: 3306
+- MariaDB: 3306
+- PostgreSQL: 5432
+- Redis: 6379
+
+> [!NOTE]
+> As of now you can install only one of database services (mysql, mariadb or pgsql). Configure or add command prompt you about database you want to use if you try to install many.
+
+## Minio
+
+If you plan to use Amazon S3 to store files while running your application in its production environment, you may wish to install the MinIO service when installing Sail. MinIO provides an S3 compatible API that you may use to develop locally using Adonis's S3 storage driver without creating "test" storage buckets in your production S3 environment. If you choose to install MinIO while installing Sail, a MinIO configuration section will be added to your application's compose.yml file.
+
+You will need to [install the official Adonis drive](https://docs.adonisjs.com/guides/digging-deeper/drive) package with [S3 service](https://flydrive.dev/docs/services/s3) to use MinIO locally.
+
+Then change configuration in `config/drive.ts` file like this:
+
+```ts
+...
+s3: services.s3({
+  credentials: {
+    accessKeyId: env.get('AWS_ACCESS_KEY_ID'),
+    secretAccessKey: env.get('AWS_SECRET_ACCESS_KEY'),
+  },
+  region: env.get('AWS_REGION'),
+  bucket: env.get('S3_BUCKET'),
+  visibility: 'public',
+  endpoint: env.get('S3_ENPOINT'),
+  forcePathStyle: true,
+  urlBuilder: {
+    async generateURL(key, bucket, s3Client) {
+      return `${env.get('S3_ENDPOINT')}/${bucket}/${key}`
+    },
+  },
+})
+...
+```
+
+You can now use the `@adonisjs/drive` package to store and fetch files like you would do normally on a real AWS bucket. You can also access MinIO dashboard at : http://localhost:8900/dashboard (user: `sail`, password: `password`).
+
+## License
+
+[MIT licensed](LICENSE.md).
