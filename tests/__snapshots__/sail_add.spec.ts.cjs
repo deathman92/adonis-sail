@@ -1,6 +1,6 @@
 exports[`Sail Add > generate compose.yml file 1`] = `"services:
   mysql:
-    image: 'mysql:8.0'
+    image: 'mysql:8.4'
     ports:
       - '\${DB_PORT:-3306}:3306'
     environment:
@@ -10,6 +10,7 @@ exports[`Sail Add > generate compose.yml file 1`] = `"services:
       MYSQL_USER: '\${DB_USER}'
       MYSQL_PASSWORD: '\${DB_PASSWORD}'
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_EXTRA_OPTIONS: '\${MYSQL_EXTRA_OPTIONS:-}'
     volumes:
       - 'sail-mysql:/var/lib/mysql'
       - './node_modules/@deathman92/adonis-sail/build/stubs/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
@@ -100,7 +101,7 @@ DB_DATABASE=app"`
 
 exports[`Sail Add > ask for single database 1`] = `"services:
   pgsql:
-    image: 'postgres:17'
+    image: 'postgres:18-alpine'
     ports:
       - '\${DB_PORT:-5432}:5432'
     environment:

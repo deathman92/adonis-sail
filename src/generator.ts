@@ -35,9 +35,17 @@ export default class Generator {
       }
 
       if (
-        !['mysql', 'pgsql', 'mariadb', 'redis', 'meilisearch', 'typesense', 'minio'].includes(
-          service
-        )
+        ![
+          'mysql',
+          'pgsql',
+          'mariadb',
+          'redis',
+          'meilisearch',
+          'typesense',
+          'minio',
+          'rustfs',
+          'valkey',
+        ].includes(service)
       ) {
         continue
       }

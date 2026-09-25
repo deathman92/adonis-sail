@@ -20,7 +20,7 @@ test.group('Sail Stop', (group) => {
   test('stop all services', async ({ assert }) => {
     const downStub = sinon
       .stub(DockerComposeRunner.prototype, 'down')
-      .resolves({ exitCode: 0, out: '', err: '' })
+      .resolves({ exitCode: 0, out: '', err: '', truncated: { out: true, err: true } })
 
     const ace = await app.container.make('ace')
     const command = await ace.create(SailStop, [])
@@ -39,7 +39,7 @@ test.group('Sail Stop', (group) => {
   test('stop one or many services', async ({ assert }) => {
     const downStub = sinon
       .stub(DockerComposeRunner.prototype, 'down')
-      .resolves({ exitCode: 0, out: '', err: '' })
+      .resolves({ exitCode: 0, out: '', err: '', truncated: { out: true, err: true } })
 
     const ace = await app.container.make('ace')
     const command = await ace.create(SailStop, ['mysql'])

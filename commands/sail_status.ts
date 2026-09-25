@@ -1,7 +1,7 @@
 import { BaseCommand } from '@adonisjs/core/ace'
 import DockerComposeRunner from '../src/docker_compose_runner.js'
 
-export default class SailAdd extends BaseCommand {
+export default class SailStatus extends BaseCommand {
   static commandName = 'sail:status'
   static description = 'Get status of running services'
 
@@ -31,8 +31,8 @@ export default class SailAdd extends BaseCommand {
 
       this.exitCode = result.exitCode || undefined
     } catch (error) {
-      this.logger.logError(error?.err?.trim() || 'Failed to start services')
-      this.exitCode = error.exitCode
+      this.logger.logError((error as any)?.err?.trim() || 'Failed to start services')
+      this.exitCode = (error as any)?.exitCode || 1
     }
   }
 }

@@ -37,6 +37,14 @@ export const ENV_VARIABLES = {
     S3_BUCKET: 'app',
     S3_ENDPOINT: 'http://localhost:$MINIO_PORT',
   },
+  rustfs: {
+    RUSTFS_PORT: '9000',
+    AWS_ACCESS_KEY_ID: 'sail',
+    AWS_SECRET_ACCESS_KEY: 'password',
+    AWS_REGION: 'us-east-1',
+    S3_BUCKET: 'app',
+    S3_ENDPOINT: 'http://localhost:$RUSTFS_PORT',
+  },
   meilisearch: {
     MEILISEARCH_PORT: '7700',
     MEILISEARCH_HOST: 'http://localhost:$MEILISEARCH_PORT',
@@ -46,6 +54,10 @@ export const ENV_VARIABLES = {
     TYPESENSE_PORT: '8108',
     TYPESENSE_NODE_URL: 'http://localhost:$TYPESENSE_PORT',
     TYPESENSE_API_KEY: 'xyz',
+  },
+  valkey: {
+    VALKEY_HOST: 'localhost',
+    VALKEY_PORT: '6379',
   },
 } as const
 

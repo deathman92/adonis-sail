@@ -12,7 +12,7 @@
 |
 */
 
-import ConfigureCommand from '@adonisjs/core/commands/configure'
+import type ConfigureCommand from '@adonisjs/core/commands/configure'
 import SailAdd from './commands/sail_add.js'
 
 export async function configure(command: ConfigureCommand) {

@@ -2,7 +2,7 @@ import { BaseCommand, args, flags } from '@adonisjs/core/ace'
 import DockerComposeRunner from '../src/docker_compose_runner.js'
 import type { Service } from '../src/services.js'
 
-export default class SailAdd extends BaseCommand {
+export default class SailStart extends BaseCommand {
   static commandName = 'sail:start'
   static description = 'Start services defined in compose.yml file'
 
@@ -33,8 +33,8 @@ export default class SailAdd extends BaseCommand {
       this.exitCode = result.exitCode || undefined
     } catch (error) {
       spinner.stop()
-      this.logger.logError(error?.err?.trim() || 'Failed to start services')
-      this.exitCode = error.exitCode
+      this.logger.logError((error as any)?.err?.trim() || 'Failed to start services')
+      this.exitCode = (error as any)?.exitCode || 1
     }
   }
 }

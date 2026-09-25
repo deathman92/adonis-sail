@@ -2,3 +2,7 @@ build
 docs
 coverage
 *.html
+
+__snapshots__
+pnpm-lock.yaml
+pnpm-workspace.yaml

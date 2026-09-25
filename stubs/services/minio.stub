@@ -1,5 +1,5 @@
 minio:
-  image: 'minio/minio:latest'
+  image: 'quay.io/minio/minio:latest'
   ports:
     - '${MINIO_PORT:-9000}:9000'
     - '${MINIO_CONSOLE_PORT:-8900}:8900'
