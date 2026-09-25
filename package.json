@@ -8,13 +8,9 @@
   },
   "type": "module",
   "files": [
-    "build/src",
-    "build/commands",
-    "build/stubs",
-    "build/index.d.ts",
-    "build/index.js",
-    "build/configure.d.ts",
-    "build/configure.js"
+    "build",
+    "!build/bin",
+    "!build/tests"
   ],
   "main": "build/index.js",
   "exports": {
@@ -42,7 +38,7 @@
   },
   "keywords": [
     "adonisjs",
-    "adonis6",
+    "adonis",
     "docker",
     "adonis-sail",
     "docker-compose"
